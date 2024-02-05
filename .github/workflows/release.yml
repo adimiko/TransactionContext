@@ -12,12 +12,19 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@v2
+
     - name: Setup .NET SDK
       uses: actions/setup-dotnet@v1
+
+    - name: Docker Setup Buildx
+      uses: docker/setup-buildx-action@v3.0.0
+            
     - name: Build
       run: dotnet build -c Release
+
     - name: Test
       run: dotnet test -c Release --no-build
+      
     - name: Publish NuGet packacges
       env:
         NUGET_API_KEY: ${{ secrets.nuget_api_key }}
