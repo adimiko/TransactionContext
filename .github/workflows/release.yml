@@ -1,0 +1,25 @@
+name: Release
+
+on:
+  release:
+    types: [published]
+    
+jobs:
+  build:
+  
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+    - name: Setup .NET SDK
+      uses: actions/setup-dotnet@v1
+    - name: Build
+      run: dotnet build -c Release
+    - name: Test
+      run: dotnet test -c Release --no-build
+    - name: Publish NuGet packacges
+      env:
+        NUGET_API_KEY: ${{ secrets.nuget_api_key }}
+      run: chmod +x ./scripts/publish.sh && ./scripts/publish.sh
+      shell: bash
