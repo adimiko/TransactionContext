@@ -1,0 +1,8 @@
+<Project>
+
+    <PropertyGroup>
+        <AccelerateBuildsInVisualStudio>true</AccelerateBuildsInVisualStudio>
+        <NoWarn>$(NoWarn);CS8604</NoWarn>
+    </PropertyGroup>
+
+</Project>
