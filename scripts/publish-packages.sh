@@ -7,7 +7,7 @@ do
     dir=${dir%*/}
     echo Publishing NuGet package:  ${dir##*/}
     
-    exec ./scripts/publish-package.sh ${dir##*/} &
+    exec ./scripts/publish-package.sh  ${dir##*/} &
     wait
 done
 
