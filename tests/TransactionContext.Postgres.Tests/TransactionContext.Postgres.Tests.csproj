@@ -27,6 +27,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\source\TransactionContext.Postgres\TransactionContext.Postgres.csproj" />
+    <ProjectReference Include="..\TransactionContext.Tests.SeedWork\TransactionContext.Tests.SeedWork.csproj" />
   </ItemGroup>
 
 </Project>
