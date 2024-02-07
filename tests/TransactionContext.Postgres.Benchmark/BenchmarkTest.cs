@@ -37,7 +37,36 @@ namespace TransactionContext.Postgres.Benchmark
         const int NumberOfCustomers = 10;
 
         [Benchmark]
-        public async Task DbContextTest()
+        public async Task TransactionContextTest_Single()
+        {
+            using (var scope = ServiceProvider.CreateScope())
+            {
+                var transactionContext = scope.ServiceProvider.GetRequiredService<ITransactionContext>();
+
+                var customerId = Guid.NewGuid();
+
+                transactionContext.Add(CustomerSQL.Insert, new { CustomerId = customerId, Name = "Name" });
+
+                await transactionContext.Commit();
+            }
+        }
+
+        [Benchmark]
+        public async Task TransactionScopeTest_Single()
+        {
+            using (TransactionScope scope = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled))
+            using (var connection = DbConnectionFactory.Create())
+            {
+                var customerId = Guid.NewGuid();
+
+                await connection.ExecuteAsync(CustomerSQL.Insert, new { CustomerId = customerId, Name = "Name" });
+
+                scope.Complete();
+            }
+        }
+
+        [Benchmark]
+        public async Task TransactionContextTest_Multiple()
         {
             using (var scope = ServiceProvider.CreateScope())
             {
@@ -62,7 +91,7 @@ namespace TransactionContext.Postgres.Benchmark
         }
 
         [Benchmark]
-        public async Task TransactionScopeTest()
+        public async Task TransactionScopeTest_Multiple()
         {
             using (TransactionScope scope = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled))
             using (var connection = DbConnectionFactory.Create())
