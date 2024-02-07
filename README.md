@@ -2,7 +2,8 @@
 TransactionContext is designed to execute statements changing state (also call to stored procedures) in a single transaction and a single request to database (collects SQL statements without instant execution). 
 
 It can be an alternative for Entity Framework Core and TransactionScope in .NET.     
-
+   
+## ITransactionContext
 ```csharp
 transactionContext.Add("INSERT INTO Customers (CustomerId) VALUES (@CustomerId)", new { CustomerId = Guid.NewGuid() });
 transactionContext.Add("INSERT INTO Orders (OrderId) VALUES (@OrderId)", new { OrderId = Guid.NewGuid() });
@@ -14,12 +15,19 @@ transactionContext.Add("INSERT INTO Orders (OrderId) VALUES (@OrderId)", new { O
 await transactionContext.Commit();
 ```
 
-## Postgres
-### Add package
+## IDbConnectionFactory
+Package also includes a database connection factory.
+```csharp
+using var connection = dbConnectionFactory.Create()
+```
+
+## Supported databases
+### Postgres
+#### Add package
 ```csharp
 dotnet add package TransactionContext.Postgres
 ```
-### Register dependencies
+#### Register dependencies
 ```csharp
 services.AddTransactionContext(x => x.UsePostgres(connectionString));
 ```
