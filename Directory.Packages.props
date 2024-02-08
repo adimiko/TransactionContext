@@ -5,10 +5,13 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageVersion Include="BenchmarkDotNet" Version="0.13.12" />
+    <PackageVersion Include="Microsoft.Data.SqlClient" Version="5.2.0-preview5.24024.3" />
     <PackageVersion Include="Microsoft.Extensions.DependencyInjection" Version="8.0.0" />
     <PackageVersion Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="8.0.0" />
     <PackageVersion Include="Dapper" Version="2.1.28" />
     <PackageVersion Include="Npgsql" Version="8.0.1" />
+    <PackageVersion Include="System.Data.SqlClient" Version="4.8.6" />
+    <PackageVersion Include="Testcontainers.MsSql" Version="3.6.0" />
     <PackageVersion Include="Testcontainers.PostgreSql" Version="3.7.0" />
     <!-- Test references -->
     <PackageVersion Include="xunit" Version="2.5.0" />

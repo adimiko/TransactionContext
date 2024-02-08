@@ -1,11 +1,11 @@
 ﻿using Dapper;
-using TransactionContext.Postgres.Tests.SeedWork;
+using TransactionContext.SqlServer.Tests.SeedWork;
 using TransactionContext.Tests.SeedWork;
 using Xunit;
 
-namespace TransactionContext.Postgres.Tests
+namespace TransactionContext.SqlServer.Tests
 {
-    public sealed class TransactionContextTests : PostgreSqlContainerTest
+    public sealed class SqlServerTransactionContextTests : SqlServerContainerTest
     {
         [Fact]
         public async Task BasicTest()
@@ -20,7 +20,7 @@ namespace TransactionContext.Postgres.Tests
 
                 TransactionContext.Add(CustomerSQL.Insert, new { CustomerId = customerId, Name = $"name{i}" });
                 TransactionContext.Add(OrderSQL.Insert, new { OrderId = orderId, CustomerId = customerId });
-                
+
                 TransactionContext.Add(OrderItemSQL.Insert, new { OrderItemId = Guid.NewGuid(), OrderId = orderId, Name = $"Name{i}", Amount = i + 1 });
                 TransactionContext.Add(OrderItemSQL.Insert, new { OrderItemId = Guid.NewGuid(), OrderId = orderId, Name = $"Name{i}", Amount = i + 1 });
                 TransactionContext.Add(OrderItemSQL.Insert, new { OrderItemId = Guid.NewGuid(), OrderId = orderId, Name = $"Name{i}", Amount = i + 1 });
