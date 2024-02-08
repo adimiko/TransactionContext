@@ -21,7 +21,7 @@ Package also includes a database connection factory.
 using var connection = dbConnectionFactory.Create()
 ```
 
-## Supported databases
+## Databases
 ### Postgres
 #### Add package
 ```csharp
@@ -30,4 +30,14 @@ dotnet add package TransactionContext.Postgres
 #### Register dependencies
 ```csharp
 services.AddTransactionContext(x => x.UsePostgres(connectionString));
+```
+
+### Microsoft SQL Server (preview)
+#### Add package
+```csharp
+dotnet add package TransactionContext.SqlServer
+```
+#### Register dependencies
+```csharp
+services.AddTransactionContext(x => x.UseSqlServer(connectionString));
 ```
