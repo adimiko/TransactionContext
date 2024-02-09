@@ -41,3 +41,13 @@ dotnet add package TransactionContext.SqlServer
 ```csharp
 services.AddTransactionContext(x => x.UseSqlServer(connectionString));
 ```
+
+### MySql
+#### Add package
+```csharp
+dotnet add package TransactionContext.MySql
+```
+#### Register dependencies
+```csharp
+services.AddTransactionContext(x => x.UseMySql(connectionString));
+```
