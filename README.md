@@ -42,7 +42,7 @@ dotnet add package TransactionContext.SqlServer
 services.AddTransactionContext(x => x.UseSqlServer(connectionString));
 ```
 
-### MySql
+### MySql (also MariaDb)
 #### Add package
 ```csharp
 dotnet add package TransactionContext.MySql
