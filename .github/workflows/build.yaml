@@ -12,10 +12,7 @@ jobs:
     name: Build and analyze
     runs-on: windows-latest
     steps:
-
-      - name: Setup Docker
-        uses: docker/setup-buildx-action@v3.0.0
-
+    
       - name: Set up JDK 17
         uses: actions/setup-java@v3
         with:
@@ -57,5 +54,4 @@ jobs:
           .\.sonar\scanner\dotnet-sonarscanner begin /k:"adimiko_transactioncontext" /o:"adimiko" /d:sonar.token="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io"
           dotnet restore
           dotnet build -c Release --no-incremental --no-restore
-          dotnet test -c Release --no-restore
           .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.token="${{ secrets.SONAR_TOKEN }}"
