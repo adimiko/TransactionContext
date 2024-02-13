@@ -31,15 +31,12 @@ jobs:
       - name: Build
         run: dotnet build -c Release
 
-      - name: Test
-        run: dotnet test -c Release --no-build
-
-      - name: SonarCloud Scan
-        uses: sonarsource/sonarcloud-github-action@master
-        with:
-          args: >
-            -Dsonar.organization=adimiko
-            -Dsonar.projectKey=adimiko_transactioncontext
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+      - name: Test and scan
+        run: |
+          dotnet tool install --global dotnet-sonarscanner
+          dotnet tool install --global dotnet-coverage
+          dotnet sonarscanner begin /k:"adimiko_transactioncontext" /o:"adimiko" /d:sonar.token="${{ secrets.SONAR_TOKEN }}" /d:sonar.cs.vscoveragexml.reportsPaths=coverage.xml
+          dotnet build --no-incremental
+          dotnet-coverage collect "dotnet test" -f xml -o "coverage.xml"
+          dotnet sonarscanner end /d:sonar.token="${{ secrets.SONAR_TOKEN }}"
+        shell: bash
