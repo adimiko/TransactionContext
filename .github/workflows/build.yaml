@@ -6,7 +6,7 @@ on:
       - main
   pull_request:
     types: [opened, synchronize, reopened]
-    
+
 jobs:
   build:
     name: Build and analyze
@@ -52,5 +52,6 @@ jobs:
         shell: powershell
         run: |
           .\.sonar\scanner\dotnet-sonarscanner begin /k:"adimiko_transactioncontext" /o:"adimiko" /d:sonar.token="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io"
+          dotnet restore
           dotnet build -c Release --no-incremental --no-restore
           .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.token="${{ secrets.SONAR_TOKEN }}"
