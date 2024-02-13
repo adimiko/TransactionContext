@@ -33,8 +33,8 @@ jobs:
 
       - name: Test and scan
         run: |
-          dotnet tool install --global dotnet-sonarscanner
-          dotnet tool install --global dotnet-coverage
+          dotnet tool install --global dotnet-sonarscanner --add-source 'https://api.nuget.org/v3/index.json' --ignore-failed-sources
+          dotnet tool install --global dotnet-coverage --add-source 'https://api.nuget.org/v3/index.json' --ignore-failed-sources
           dotnet sonarscanner begin /k:"adimiko_transactioncontext" /o:"adimiko" /d:sonar.token="${{ secrets.SONAR_TOKEN }}" /d:sonar.cs.vscoveragexml.reportsPaths=coverage.xml
           dotnet build --no-incremental
           dotnet-coverage collect "dotnet test" -f xml -o "coverage.xml"
