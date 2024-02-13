@@ -28,6 +28,7 @@ jobs:
         uses: actions/setup-java@v3
         with:
           java-version: 17
+          distribution: 'zulu'
 
       - name: Docker Setup Buildx
         uses: docker/setup-buildx-action@v3.0.0
